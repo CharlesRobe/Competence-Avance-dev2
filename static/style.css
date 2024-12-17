@@ -1,0 +1,158 @@
+/* Styles globaux pour le body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Conteneur principal centré */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Centrage du pseudo */
+.player-name {
+    font-size: 2em;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* Liste des matchs */
+.match-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style général pour le conteneur du match */
+.match-item {
+    display: flex;
+    flex-direction: row; /* Aligner horizontalement */
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+/* Champion info section */
+.champion-info {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.champion-img {
+    width: 64px;
+    height: 64px;
+    margin-right: 10px;
+}
+
+.summoner-spells {
+    display: flex;
+    flex-direction: column;
+}
+
+.spell-img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+}
+
+/* Statut du match (victoire ou défaite) */
+.match-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+}
+
+.victory-text {
+    color: green;
+}
+
+.defeat-text {
+    color: red;
+}
+
+.queue-type {
+    font-size: 12px;
+    color: gray;
+}
+
+.time-ago, .game-duration {
+    font-size: 12px;
+    color: gray;
+}
+
+/* Stats section (KDA, CS, etc.) */
+.stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.kda {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.cs, .kp {
+    font-size: 12px;
+    color: gray;
+}
+
+/* Items */
+.items {
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-img {
+    width: 32px;
+    height: 32px;
+    margin-right: 5px;
+}
+
+/* Participants */
+.participants {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.participant {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.participant-img {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+}
+
+/* Style pour les victoires et défaites */
+.match-item.win {
+    background-color: #e6ffe6; /* Vert pâle pour les victoires */
+}
+
+.match-item.lost {
+    background-color: #ffe6e6; /* Rouge pâle pour les défaites */
+}
+
+/* Style pour les remakes */
+.match-item.remake {
+    background-color: #f0f0f0; /* Gris clair pour les remakes */
+}

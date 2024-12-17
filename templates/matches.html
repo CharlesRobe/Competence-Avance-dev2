@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ game_name }}'s Match History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="player-name">{{ game_name }}</h1>
+
+        <ul class="match-list">
+            {% for match in matches %}
+                {% set participant = match['info']['participants'] | selectattr('puuid', 'equalto', puuid) | first %}
+                
+                {% if participant %}
+                    <li class="match-item {% if participant['win'] %}win{% elif match['info']['gameDuration'] < 180 %}remake{% else %}lost{% endif %}">
+                        <div class="match-info">
+                            <!-- Affichage du champion et des sorts d'invocateur -->
+                            <div class="champion-info">
+                                <img src="http://ddragon.leagueoflegends.com/cdn/12.18.1/img/champion/{{ participant['championName'] }}.png" class="champion-img" alt="{{ participant['championName'] }}">
+                                <div class="summoner-spells">
+                                    <img src="http://ddragon.leagueoflegends.com/cdn/12.18.1/img/spell/{{ participant['summoner1Id'] }}.png" class="spell-img">
+                                    <img src="http://ddragon.leagueoflegends.com/cdn/12.18.1/img/spell/{{ participant['summoner2Id'] }}.png" class="spell-img">
+                                </div>
+                            </div>
+
+                            <!-- Statut du match (Victoire ou Défaite) et type de queue -->
+                            <div class="match-status">
+                                <span class="{% if participant['win'] %}victory-text{% else %}defeat-text{% endif %}">
+                                    {% if participant['win'] %}Victory{% else %}Defeat{% endif %}
+                                </span>
+                                <span class="queue-type">Soloqueue</span> <!-- Modifier selon la queue détectée -->
+                                <span class="time-ago">15 hours ago</span> <!-- Exemple statique, remplacer par un vrai calcul -->
+                                <span class="game-duration">{{ match['info']['gameDuration']//60 }}m {{ match['info']['gameDuration'] % 60 }}s</span>
+                            </div>
+
+                            <!-- Affichage du KDA, CS, et participation aux kills -->
+                            <div class="stats">
+                                <span class="kda">{{ participant['kills'] }} / {{ participant['deaths'] }} / {{ participant['assists'] }}</span>
+                                <span class="cs">{{ participant['totalMinionsKilled'] + participant['neutralMinionsKilled'] }} CS</span>
+                                <span class="kp">
+                                    {% if match['info']['teams'][0]['objectives']['champion']['kills'] > 0 %}
+                                        {{ ((participant['kills'] + participant['assists']) / match['info']['teams'][0]['objectives']['champion']['kills'] * 100)|round(1) }}% Kills Participation
+                                    {% else %}
+                                        0% Kills Participation
+                                    {% endif %}
+                                </span>
+                            </div>
+
+                            <!-- Affichage des objets du joueur -->
+                            <div class="items">
+                                {% for i in range(0, 7) %}
+                                    <img src="http://ddragon.leagueoflegends.com/cdn/12.18.1/img/item/{{ participant['item' + i|string] }}.png" class="item-img">
+                                {% endfor %}
+                            </div>
+
+                            <!-- Affichage des participants alliés et ennemis -->
+                            <div class="participants allies-enemies">
+                                <div class="participants allies">
+                                    {% for ally in match['info']['participants'] if ally['teamId'] == participant['teamId'] %}
+                                        <div class="participant">
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/12.18.1/img/champion/{{ ally['championName'] }}.png" class="participant-img" alt="{{ ally['championName'] }}">
+                                            <span>{{ ally['summonerName'] }}</span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="participants enemies">
+                                    {% for enemy in match['info']['participants'] if enemy['teamId'] != participant['teamId'] %}
+                                        <div class="participant">
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/12.18.1/img/champion/{{ enemy['championName'] }}.png" class="participant-img" alt="{{ enemy['championName'] }}">
+                                            <span>{{ enemy['summonerName'] }}</span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
