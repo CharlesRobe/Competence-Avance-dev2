@@ -3,12 +3,44 @@ import requests
 import json
 import os
 import time
+import logging
 
 app = Flask(__name__)
 
 API_KEY = 'RGAPI-25bf4e88-1ac9-48b2-a8b1-d1b7587f124b'
 MATCHES_FILE = 'matches_data.json'
 
+
+
+# Configuration des logs
+logging.basicConfig(
+    filename='app.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+# Exemple d'ajout de logs dans les fonctions
+def make_request(url):
+    logging.info(f"Requête envoyée à : {url}")
+    response = requests.get(url)
+    if response.status_code == 200:
+        logging.info(f"Requête réussie pour : {url}")
+        return response.json()
+    elif response.status_code == 403:
+        logging.error(f"Erreur 403 : Accès interdit pour {url}")
+    else:
+        logging.error(f"Erreur {response.status_code} pour {url}")
+        logging.error(f"Réponse : {response.json()}")
+    return None
+
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    if request.method == 'POST':
+        game_name = request.form['game_name']
+        tag_line = request.form['tag_line']
+        logging.info(f"Formulaire soumis : game_name={game_name}, tag_line={tag_line}")
+        return redirect(url_for('matches', game_name=game_name, tag_line=tag_line))
+    return render_template('index.html')
 # Fonction pour faire les requêtes
 def make_request(url):
     response = requests.get(url)
