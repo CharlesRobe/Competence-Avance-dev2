@@ -22,3 +22,13 @@
 2024-12-19 01:52:48,559 - INFO - Formulaire soumis : game_name=LeChali, tag_line=EUW
 2024-12-19 01:52:48,559 - INFO - 127.0.0.1 - - [19/Dec/2024 01:52:48] "[32mPOST / HTTP/1.1[0m" 302 -
 2024-12-19 01:52:48,797 - INFO - 127.0.0.1 - - [19/Dec/2024 01:52:48] "GET /matches/LeChali/EUW HTTP/1.1" 200 -
+2024-12-19 01:58:14,014 - INFO -  * Detected change in 'C:\\Users\\charl\\Bureau\\site lol\\Competence-Avance-dev2\\app.py', reloading
+2024-12-19 01:58:14,065 - INFO -  * Restarting with stat
+2024-12-19 01:58:14,713 - WARNING -  * Debugger is active!
+2024-12-19 01:58:14,717 - INFO -  * Debugger PIN: 268-162-898
+2024-12-19 01:58:34,291 - INFO -  * Detected change in 'C:\\Users\\charl\\Bureau\\site lol\\Competence-Avance-dev2\\app.py', reloading
+2024-12-19 01:58:34,344 - INFO -  * Restarting with stat
+2024-12-19 01:58:35,002 - WARNING -  * Debugger is active!
+2024-12-19 01:58:35,006 - INFO -  * Debugger PIN: 268-162-898
+2024-12-19 01:58:36,660 - INFO -  * Detected change in 'C:\\Users\\charl\\Bureau\\site lol\\Competence-Avance-dev2\\app.py', reloading
+2024-12-19 01:58:36,715 - INFO -  * Restarting with stat
